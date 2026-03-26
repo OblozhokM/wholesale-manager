@@ -5,6 +5,7 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Управління товарами</h2>
+        <a href="{{ route('admin.products.create') }}" class="btn btn-success">+ Додати товар</a>
     </div>
 
     @if(session('success'))
