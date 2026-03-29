@@ -1,17 +1,14 @@
 @props(['product'])
 
 <div class="card h-100 shadow-sm">
-    <div class="card-body">
-        <h5 class="card-title">{{ $product['name'] }}</h5>
-        <h6 class="card-subtitle mb-2 text-primary">{{ $product['price'] }} грн</h6>
-        
-        @if($product['delivery_available'])
-            <span class="badge bg-success">Доставка доступна</span>
-        @else
-            <span class="badge bg-secondary">Тільки самовивіз</span>
-        @endif
-    </div>
-    <div class="card-footer bg-transparent border-top-0">
-        <a href="/products/{{ $product['id'] }}" class="btn btn-outline-dark w-100">Детальніше</a>
+    <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ $product->name }}</h5>
+        <p class="card-text text-primary fs-4 fw-bold">{{ $product->current_price }} грн</p>
+        <p class="card-text mb-4">
+            <small class="text-muted">
+                Доставка: {{ $product->delivery_available ? 'Доступна' : 'Тільки самовивіз' }}
+            </small>
+        </p>
+        <a href="{{ route('products.show', $product->product_id) }}" class="btn btn-outline-primary mt-auto">Детальніше</a>
     </div>
 </div>
