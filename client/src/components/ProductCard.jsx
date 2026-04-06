@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onAddToCart }) {
     const [count, setCount] = useState(0);
 
     const handleIncrement = () => setCount(count + 1);
@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
                     color: 'white', cursor: count > 0 ? 'pointer' : 'not-allowed' 
                 }}
                 disabled={count === 0}
-                onClick={() => alert(`Додано до кошика: ${product.name} (${count} шт.)`)}
+                onClick={() => onAddToCart(product, count)}
             >
                 Купити
             </button>
