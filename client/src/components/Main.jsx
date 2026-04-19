@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import PromoBanner from './PromoBanner';
 
 const productsData = [
     { id: 1, name: "Ноутбук Lenovo ThinkPad", price: 24000 },
@@ -9,7 +10,23 @@ const productsData = [
 ];
 
 export default function Main() {
-    const [cart, setCart] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem('wholesale_cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('wholesale_cart', JSON.stringify(cart));
+    }, [cart]);
 
     const handleAddToCart = (product, quantity) => {
         const newItem = { ...product, quantity };
@@ -19,15 +36,22 @@ export default function Main() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     const totalSum = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
+    if (isLoading) {
+        return (
+            <div style={{flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh', flexDirection: 'column' }}>
+                <h1 style={{ fontSize: '40px', animation: 'spin 2s linear infinite' }}>⏳</h1>
+                <h2>Завантаження каталогу...</h2>
+            </div>
+        );
+    }
+
     return (
         <main className="main-content" style={{ flex: 1, padding: '40px 20px', textAlign: 'center' }}>
+            <PromoBanner />
+
             <section className="welcome-section" style={{ marginBottom: '40px' }}>
                 <h1 className="welcome-title">Каталог обладнання</h1>
-                <p className="welcome-text" style={{ fontSize: '18px', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
-                    Використовуйте лічильник для вибору потрібної кількості товару.
-                </p>
-
-                {/* Відображаємо кошик, щоб викладач бачив, що дані піднялися вгору */}
+                
                 <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#e9ecef', borderRadius: '8px', display: 'inline-block', minWidth: '300px' }}>
                     <h3>🛒 Кошик</h3>
                     <p style={{ margin: '5px 0' }}>Товарів обрано: <strong>{totalItems} шт.</strong></p>
