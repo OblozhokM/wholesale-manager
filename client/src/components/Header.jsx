@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
     return (
         <header className="site-header" style={{ backgroundColor: '#212529', padding: '15px 0' }}>
@@ -5,9 +7,9 @@ export default function Header() {
                 <h2 className="logo" style={{ color: 'white', margin: 0 }}>WholesaleStore</h2>
                 <nav>
                     <ul className="nav-menu" style={{ display: 'flex', listStyle: 'none', gap: '20px', margin: 0, padding: 0 }}>
-                        <li><a href="/" style={{ color: 'white', textDecoration: 'none' }}>Головна</a></li>
-                        <li><a href="/catalog" style={{ color: '#ffc107', textDecoration: 'none' }}>Каталог</a></li>
-                        <li><a href="/about" style={{ color: 'white', textDecoration: 'none' }}>Про нас</a></li>
+                        <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Головна</Link></li>
+                        <li><Link to="/catalog" style={{ color: '#ffc107', textDecoration: 'none' }}>Каталог</Link></li>
+                        <li><Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>Про нас</Link></li>
                     </ul>
                 </nav>
             </div>

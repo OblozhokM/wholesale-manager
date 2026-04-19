@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product, onAddToCart }) {
     const [count, setCount] = useState(0);
@@ -34,6 +35,12 @@ export default function ProductCard({ product, onAddToCart }) {
             >
                 Купити
             </button>
+            <Link 
+                to={`/product/${product.id}`} 
+                style={{ display: 'block', textAlign: 'center', marginTop: '10px', textDecoration: 'none', color: '#0d6efd' }}
+            >
+                Детальніше
+            </Link>
         </div>
     );
 }
