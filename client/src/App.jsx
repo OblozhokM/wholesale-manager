@@ -4,7 +4,8 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetails from './pages/ProductDetails';
-import AboutPage from './pages/AboutPage'; // ДОДАЛИ ІМПОРТ
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage.jsx';
 import './App.css';
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/catalog" element={<CatalogPage />} />
                     <Route path="/product/:id" element={<ProductDetails />} />
-                    <Route path="/about" element={<AboutPage />} /> {/* ДОДАЛИ МАРШРУТ */}
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
                 </Routes>
                 <Footer />
             </div>

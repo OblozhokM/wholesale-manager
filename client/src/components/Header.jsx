@@ -10,6 +10,7 @@ export default function Header() {
                         <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Головна</Link></li>
                         <li><Link to="/catalog" style={{ color: '#ffc107', textDecoration: 'none' }}>Каталог</Link></li>
                         <li><Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>Про нас</Link></li>
+                        <li><Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Контакти</Link></li>
                     </ul>
                 </nav>
             </div>
