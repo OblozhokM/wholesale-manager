@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
+import PromoBanner from '../components/PromoBanner';
 
 export default function CatalogPage() {
     const [products, setProducts] = useState([]);
@@ -36,7 +37,6 @@ export default function CatalogPage() {
                         return true;
                     });
                 }
-
                 setProducts(allProducts);
             } catch (error) {
                 console.error("API Error:", error);
@@ -44,7 +44,6 @@ export default function CatalogPage() {
                 setIsLoading(false);
             }
         };
-
         fetchData();
     }, [selectedCategory]);
 
@@ -54,17 +53,23 @@ export default function CatalogPage() {
     };
 
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalSum = cart.reduce((sum, item) => sum + ((Number(item.current_price) || item.price || 0) * item.quantity), 0);
+    const totalSum = cart.reduce((sum, item) => sum + ((item.appliedPrice || item.current_price || item.price || 0) * item.quantity), 0);
 
     return (
         <main className="main-content" style={{ flex: 1, padding: '40px 20px', textAlign: 'center' }}>
+            
+            {/* 3. ВСТАВЛЯЄМО БАНЕР ОСЬ ТУТ */}
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                <PromoBanner />
+            </div>
+
             <section className="welcome-section" style={{ marginBottom: '40px' }}>
                 <h1 className="welcome-title">Каталог обладнання</h1>
                 
                 <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#e9ecef', borderRadius: '8px', display: 'inline-block', minWidth: '300px' }}>
                     <h3>🛒 Кошик</h3>
                     <p style={{ margin: '5px 0' }}>Товарів обрано: <strong>{totalItems} шт.</strong></p>
-                    <p style={{ margin: '5px 0' }}>Загальна сума: <strong style={{ color: '#198754' }}>{totalSum} грн</strong></p>
+                    <p style={{ margin: '5px 0' }}>Загальна сума: <strong style={{ color: '#198754' }}>{totalSum.toFixed(0)} грн</strong></p>
                 </div>
 
                 <div style={{ marginTop: '30px' }}>
